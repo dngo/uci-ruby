@@ -3,7 +3,7 @@
 $:.unshift "./lib"
 
 require 'pry'
-require 'stockfish'
+require 'uci'
 
 
 engine = Stockfish::Engine.new("bin/stockfish_8_64_linux")

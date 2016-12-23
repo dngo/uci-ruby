@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.authors = ["David Ngo"]
   s.email = ["davngo@gmail.com"]
 
-  s.summary = "Ruby client for the Stockfish chess engine"
-  s.description = "Ruby client for the Stockfish chess engine"
+  s.summary = "Ruby client for the uci chess engines"
+  s.description = "Ruby client for uci chess engines"
   s.license = "MIT"
 
   s.files         = `git ls-files -z`.split("\x0")
