@@ -23,5 +23,4 @@ def parsed_fixture(fixture_path)
   parser.new(analysis_output).parse
 end
 
-require 'stockfish'
-
+require 'uci'

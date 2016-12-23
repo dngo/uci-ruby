@@ -1,4 +1,4 @@
-module Stockfish
+module Uci
 
   # Converts raw analysis output into a hash
   #

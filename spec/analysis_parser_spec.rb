@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Stockfish::AnalysisParser do
+describe Uci::AnalysisParser do
 
-  subject(:parser) { Stockfish::AnalysisParser }
+  subject(:parser) { Uci::AnalysisParser }
 
   it "suggests_a_move_for_a_normal_position" do
     output = parsed_fixture("analysis_outputs/tough_midgame.txt")

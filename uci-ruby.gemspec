@@ -3,12 +3,12 @@
 lib = File.expand_path('../lib', __FILE__)
 $:.unshift(lib) unless $:.include?(lib)
 
-require 'stockfish/version'
+require 'uci/version'
 
 
 Gem::Specification.new do |s|
   s.name = "uci-ruby"
-  s.version = Stockfish::VERSION
+  s.version = Uci::VERSION
   s.authors = ["David Ngo"]
   s.email = ["davngo@gmail.com"]
 

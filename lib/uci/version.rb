@@ -1,3 +1,3 @@
-module Stockfish
+module Uci
   VERSION = "0.3.0"
 end

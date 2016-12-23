@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 
-describe Stockfish::Engine do
+describe Uci::Engine do
 
-  subject(:engine) { Stockfish::Engine.new("bin/stockfish_8_x64_linux") }
+  subject(:engine) { Uci::Engine.new }
 
   it "test_engine_version_is_valid" do
     expect(engine.version).to match(/^Stockfish \d+/)

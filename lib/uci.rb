@@ -1,8 +1,8 @@
-require "stockfish/engine"
-require "stockfish/analysis_parser"
+require "uci/engine"
+require "uci/analysis_parser"
 
 
-module Stockfish
+module Uci
 
   def self.analyze(fen, options = {})
     multipv = options.delete(:multipv)

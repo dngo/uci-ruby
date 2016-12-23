@@ -1,4 +1,4 @@
-# Ruby Stockfish
+# UCI Ruby
 
 A ruby client for the [Stockfish](https://stockfishchess.org/) chess engine
 
