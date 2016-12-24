@@ -57,28 +57,8 @@ module Uci
       write_to_engine "setoption name MultiPV value #{n}"
     end
 
-    #def ready?
-      #ready = false
-      #num_retries = 0
-      #until ready == true do
-        #if write_to_engine("isready").strip == "readyok"
-          #ready = true
-        #else
-          #num_retries += 1
-          #Rails.logger.info "UCI Engine was not ready on try #{num_retries}"
-          #sleep(0.25)
-        #end
-      #end
-
-      #true
-    #end
-
     def ready?
       write_to_engine("isready").strip == "readyok"
-    end
-
-    def get_best_move(move_time)
-      write_to_engine("go movetime #{move_time}") if ready?
     end
 
     def analyze(fen, options)
