@@ -48,7 +48,7 @@ module Uci
     def handle_game_over
       game_over = @raw_analysis.match(/^info depth 0 score (?<outcome>[a-z]+) 0$/)
       score = case game_over[:outcome]
-              when "mate" then "mate 0"
+              when "mate" then "checkmate"
               when "cp" then 0
               end
       @analysis = {
@@ -67,7 +67,7 @@ module Uci
       analysis = row.match(ROW_SCANNER)
       score = case analysis[:score_type]
               when "cp" then analysis[:score].to_f/100
-              when "mate" then "mate #{analysis[:score]}"
+              when "mate" then "mate in #{analysis[:score]}"
               end
       variation = {
         :score    => score,

@@ -29,28 +29,28 @@ describe Uci::AnalysisParser do
     expect(output[:best_move]).to be_nil
     expect(output[:variations].length).to eql 1
     move = output[:variations][0]
-    expect(move[:score]).to eql "mate 0"
+    expect(move[:score]).to eql "checkmate"
   end
 
   it "detects_imminent_win_by_checkmate" do
     output = parsed_fixture("analysis_outputs/mate_in_1.txt")
     expect(output[:variations].length).to eql 1
     move = output[:variations][0]
-    expect move[:score] == "mate 1"
+    expect(move[:score]).to eql "mate in 1"
   end
 
   it "detects_win_by_checkmate" do
     output = parsed_fixture("analysis_outputs/white_wins_in_4.txt")
     expect(output[:variations].length).to eql 1
     move = output[:variations][0]
-    expect move[:score] == "mate 4"
+    expect(move[:score]).to eql "mate in 4"
   end
 
   it "detects_loss_by_checkmate" do
     output = parsed_fixture("analysis_outputs/black_loses_in_3.txt")
     expect(output[:variations].length).to eql 1
     move = output[:variations][0]
-    expect move[:score] == "mate -3"
+    expect(move[:score]).to eql "mate in -3"
   end
 
 end
