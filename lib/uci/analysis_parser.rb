@@ -49,7 +49,7 @@ module Uci
       game_over = @raw_analysis.match(/^info depth 0 score (?<outcome>[a-z]+) 0$/)
       score = case game_over[:outcome]
               when "mate" then "checkmate"
-              when "cp" then 0
+              when "cp" then "stalemate"
               end
       @analysis = {
         :bestmove   => nil,

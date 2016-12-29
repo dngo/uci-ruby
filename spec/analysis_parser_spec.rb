@@ -21,7 +21,7 @@ describe Uci::AnalysisParser do
     expect(output[:best_move]).to be_nil
     expect(output[:variations].length).to eql 1
     move = output[:variations][0]
-    expect(move[:score]).to eql 0
+    expect(move[:score]).to eql "stalemate"
   end
 
   it "detects_checkmate" do
