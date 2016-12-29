@@ -8,6 +8,7 @@ describe Uci::AnalysisParser do
     output = parsed_fixture("analysis_outputs/tough_midgame.txt")
     expect(output[:variations].length).to eql 1
     expect(output[:variations][0][:score]).to eql -12.51
+    expect(output[:variations][0][:time]).to eql 3629
   end
 
   it "suggests_three_variations_for_multipv_3" do
@@ -17,7 +18,7 @@ describe Uci::AnalysisParser do
 
   it "detects_stalemate" do
     output = parsed_fixture("analysis_outputs/stalemate.txt")
-    expect(output[:bestmove]).to be_nil
+    expect(output[:best_move]).to be_nil
     expect(output[:variations].length).to eql 1
     move = output[:variations][0]
     expect(move[:score]).to eql 0
@@ -25,7 +26,7 @@ describe Uci::AnalysisParser do
 
   it "detects_checkmate" do
     output = parsed_fixture("analysis_outputs/checkmate.txt")
-    expect(output[:bestmove]).to be_nil
+    expect(output[:best_move]).to be_nil
     expect(output[:variations].length).to eql 1
     move = output[:variations][0]
     expect(move[:score]).to eql "mate 0"

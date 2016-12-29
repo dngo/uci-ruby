@@ -15,9 +15,15 @@ module Uci
       (?<score_type>\w+)?\s
       (?<score>[-\d]+)\s
       (lowerbound\s|upperbound\s)?
-      nodes
+      nodes\s
+      (?<nodes>\d+)\s
+      nps\s
+      (?<nps>\d+)\s
+      tbhits\s
+      (?<tbhits>\d+)\s
+      time\s
+      (?<time>\d+)\s
     }x
-
 
     attr_accessor :raw_analysis, :analysis
 
@@ -67,6 +73,7 @@ module Uci
         :score    => score,
         :sequence => sequence[:moves].split(/\s+/),
         :depth    => analysis[:depth].to_i,
+        :time    => analysis[:time].to_i
       }
       variation[:multipv] = analysis[:multipv].to_i if analysis[:multipv]
       variation
@@ -77,7 +84,7 @@ module Uci
         variation = parse_variation_row(row)
         next if variation.nil? || variation[:sequence].split(" ")[0] != best_move_uci
         @analysis = {
-          :bestmove   => best_move_uci,
+          :best_move   => best_move_uci,
           :variations => [variation]
         }
         return @analysis
@@ -89,7 +96,7 @@ module Uci
       multipv = nil
       count = 0
       @analysis = {
-        :bestmove   => best_move_uci,
+        :best_move   => best_move_uci,
         :variations => []
       }
       @raw_analysis.strip.split("\n").reverse.each do |row|
