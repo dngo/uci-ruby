@@ -4,7 +4,7 @@ module Uci
   #
   class AnalysisParser
 
-    ROW_SCANNER = %r{
+    ROW_SCANNER_1 = %r{
       \Ainfo\s
       depth\s
       (?<depth>\d+)\s
@@ -19,6 +19,28 @@ module Uci
       (?<nodes>\d+)\s
       nps\s
       (?<nps>\d+)\s
+      tbhits\s
+      (?<tbhits>\d+)\s
+      time\s
+      (?<time>\d+)\s
+    }x
+    ROW_SCANNER_2 = %r{
+      \Ainfo\s
+      depth\s
+      (?<depth>\d+)\s
+      seldepth\s
+      (?<seldepth>\d+)\s
+      (multipv\s(?<multipv>\d+)\s)?
+      score\s
+      (?<score_type>\w+)?\s
+      (?<score>[-\d]+)\s
+      (lowerbound\s|upperbound\s)?
+      nodes\s
+      (?<nodes>\d+)\s
+      nps\s
+      (?<nps>\d+)\s
+      hashfull\s
+      (?<hashfull>\d+)\s
       tbhits\s
       (?<tbhits>\d+)\s
       time\s
@@ -64,7 +86,7 @@ module Uci
     def parse_variation_row(row)
       sequence = row.match(/ pv (?<moves>.*)/)
       return if sequence.nil?
-      analysis = row.match(ROW_SCANNER)
+      analysis = row.match(ROW_SCANNER_1) || row.match(ROW_SCANNER_2)
       score = case analysis[:score_type]
               when "cp" then analysis[:score].to_f/100
               when "mate" then "mate in #{analysis[:score]}"

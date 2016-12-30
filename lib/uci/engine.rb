@@ -23,7 +23,6 @@ module Uci
 
     def write_to_engine(command_string)
       command = command_string.split(" ").first
-      #Rails.logger.info "UCI Engine command_string: #{command_string}, command: #{command}"
       stdin.puts command_string
 
       output = ""
@@ -49,7 +48,6 @@ module Uci
         output << @stdout.readline
       end
 
-      #Rails.logger.info "UCI Engine response: #{output}"
       output.strip
     end
 
