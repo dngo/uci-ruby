@@ -74,8 +74,8 @@ module Uci
               when "cp" then "stalemate"
               end
       @analysis = {
-        :bestmove   => nil,
-        :variations => [{ :score => score, :sequence => [], :depth => 0 }]
+        bestmove: nil,
+        variations: [{score: score, sequence: [], depth: 0 }]
       }
     end
 
@@ -92,10 +92,10 @@ module Uci
               when "mate" then "mate in #{analysis[:score]}"
               end
       variation = {
-        :score    => score,
-        :sequence => sequence[:moves].split(/\s+/),
-        :depth    => analysis[:depth].to_i,
-        :time    => analysis[:time].to_i
+        score: score,
+        sequence: sequence[:moves].split(/\s+/),
+        depth: analysis[:depth].to_i,
+        time: analysis[:time].to_i
       }
       variation[:multipv] = analysis[:multipv].to_i if analysis[:multipv]
       variation
@@ -106,8 +106,8 @@ module Uci
         variation = parse_variation_row(row)
         next if variation.nil? || variation[:sequence].split(" ")[0] != best_move_uci
         @analysis = {
-          :best_move   => best_move_uci,
-          :variations => [variation]
+          best_move: best_move_uci,
+          variations: [variation]
         }
         return @analysis
       end
@@ -118,8 +118,8 @@ module Uci
       multipv = nil
       count = 0
       @analysis = {
-        :best_move   => best_move_uci,
-        :variations => []
+        best_move: best_move_uci,
+        variations: []
       }
       @raw_analysis.strip.split("\n").reverse.each do |row|
         variation = parse_variation_row(row)
