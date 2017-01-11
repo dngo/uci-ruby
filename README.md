@@ -1,6 +1,6 @@
 # UCI Ruby
 
-A ruby client for the [Stockfish](https://stockfishchess.org/) chess engine
+A ruby client for the uci chess engines, tested with stockfish [Stockfish](https://stockfishchess.org/) chess engine
 
 
 ## Installation
