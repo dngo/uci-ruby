@@ -55,17 +55,23 @@ module Uci
       write_to_engine "setoption name MultiPV value #{n}"
     end
 
+    def level(n)
+      write_to_engine "setoption name Skill Level value #{n}"
+    end
+
     def ready?
       write_to_engine("isready").strip == "readyok"
     end
 
-    def analyze(fen, options)
+    def analyze(fen, options={})
       write_to_engine "position fen #{fen}"
       %w( depth movetime nodes ).each do |command|
         if (x = options[command.to_sym])
+          #these options override each other so just use the first option we find, instead of pass contradicting options
           return write_to_engine "go #{command} #{x}"
         end
       end
+      write_to_engine "go" #no options
     end
 
   end

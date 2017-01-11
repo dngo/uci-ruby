@@ -53,6 +53,13 @@ describe Uci::Engine do
       expect(analysis_output).to match(/multipv 3/)
       expect(analysis_output).to match(/^bestmove/)
     end
+
+    it "the engine supports levels" do
+      engine.level(1)
+      fen = read_fixture("positions/white_wins_in_4.txt")
+      analysis_output = engine.analyze(fen)
+      expect(analysis_output).to match(/^bestmove/)
+    end
   end
 
 end
