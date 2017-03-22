@@ -54,6 +54,12 @@ describe Uci::Engine do
       expect(analysis_output).to match(/^bestmove/)
     end
 
+    it "supports analysis for a specific move" do
+      fen = read_fixture("positions/white_wins_in_4.txt")
+      analysis_output = engine.analyze(fen, {searchmoves: "c6d4" })
+      expect(analysis_output).to match(/^bestmove e4d5/)
+    end
+
     it "the engine supports levels" do
       engine.level(1)
       fen = read_fixture("positions/white_wins_in_4.txt")

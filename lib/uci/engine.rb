@@ -65,13 +65,15 @@ module Uci
 
     def analyze(fen, options={})
       write_to_engine "position fen #{fen}"
-      %w( depth movetime nodes ).each do |command|
-        if (x = options[command.to_sym])
+      command = "go" #no options
+      %w( depth movetime nodes ).each do |opt|
+        if (x = options[opt.to_sym])
           #these options override each other so just use the first option we find, instead of pass contradicting options
-          return write_to_engine "go #{command} #{x}"
+          command = "go #{opt} #{x}"
         end
       end
-      write_to_engine "go" #no options
+      command << " searchmoves #{options[:searchmoves]}" if options[:searchmoves]
+      write_to_engine command
     end
 
   end
