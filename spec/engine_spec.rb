@@ -30,7 +30,7 @@ describe Uci::Engine do
     expect(engine.write_to_engine('bad string') ).to eql("Unknown command: bad string")
   end
 
-  describe '#analyze' do
+  describe '.analyze' do
     it "gets the best move from a fen" do
       expect(engine.analyze(fen, movetime: 500)).to match(/^bestmove e2e4/)
     end
@@ -68,4 +68,17 @@ describe Uci::Engine do
     end
   end
 
+  describe '.elo' do
+    it "sets playing strength for the engine" do
+      expect(engine.elo_rating(1200)).to eql('')
+    end
+
+    it "sets limit_strength to true" do
+      allow(engine).to receive(:limit_strength)
+
+      engine.elo_rating(1200)
+
+      expect(engine).to have_received(:limit_strength).with(true)
+    end
+  end
 end

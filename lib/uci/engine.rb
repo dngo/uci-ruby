@@ -1,9 +1,7 @@
 require 'open3'
 require 'io/wait'
 
-
 module Uci
-
   class InvalidBinary < StandardError; end
   class InvalidCommand < StandardError; end
   class InvalidOption < StandardError; end
@@ -59,6 +57,12 @@ module Uci
       write_to_engine "setoption name Skill Level value #{n}"
     end
 
+    # The engine is able to limit its strength to a specific Elo rating,
+    def elo_rating(elo_rating)
+      limit_strength(true)
+      write_to_engine "setoption name UCI_Elo value #{elo_rating}"
+    end
+
     def ready?
       write_to_engine("isready").strip == "readyok"
     end
@@ -76,5 +80,13 @@ module Uci
       write_to_engine command
     end
 
+    protected
+
+    # This should always be implemented together with "UCI_Elo".
+    # If UCI_LimitStrength is false, the UCI_Elo value is ignored.
+    # If UCI_LimitStrength is true, the engine plays within UCI_Elo value
+    def limit_strength(boolean_val = false)
+      write_to_engine "setoption name UCI_LimitStrength value #{boolean_val}"
+    end
   end
 end
