@@ -67,12 +67,12 @@ module Uci
       write_to_engine("isready").strip == "readyok"
     end
 
-    def analyze(fen, options={})
+    def analyze(fen, options = {})
       write_to_engine "position fen #{fen}"
-      command = "go" #no options
-      %w( depth movetime nodes ).each do |opt|
+      command = "go" # no options
+      %w(depth movetime nodes).each do |opt|
         if (x = options[opt.to_sym])
-          #these options override each other so just use the first option we find, instead of pass contradicting options
+          # these options override each other so just use the first option we find, instead of pass contradicting options
           command = "go #{opt} #{x}"
         end
       end

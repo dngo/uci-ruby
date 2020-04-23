@@ -1,9 +1,7 @@
 module Uci
-
   # Converts raw analysis output into a hash
   #
   class AnalysisParser
-
     ROW_SCANNER_1 = %r{
       \Ainfo\s
       depth\s
@@ -56,6 +54,7 @@ module Uci
 
     def parse
       return handle_game_over if game_over?
+
       if @raw_analysis.include?("multipv")
         handle_multipv
       else
@@ -75,7 +74,7 @@ module Uci
               end
       @analysis = {
         bestmove: nil,
-        variations: [{score: score, sequence: [], depth: 0 }]
+        variations: [{ score: score, sequence: [], depth: 0 }]
       }
     end
 
@@ -86,9 +85,10 @@ module Uci
     def parse_variation_row(row)
       sequence = row.match(/ pv (?<moves>.*)/)
       return if sequence.nil?
+
       analysis = row.match(ROW_SCANNER_1) || row.match(ROW_SCANNER_2)
       score = case analysis[:score_type]
-              when "cp" then analysis[:score].to_f/100
+              when "cp" then analysis[:score].to_f / 100
               when "mate" then "mate in #{analysis[:score]}"
               end
       variation = {
@@ -105,6 +105,7 @@ module Uci
       @raw_analysis.strip.split("\n").reverse.each do |row|
         variation = parse_variation_row(row)
         next if variation.nil? || variation[:sequence].split(" ")[0] != best_move_uci
+
         @analysis = {
           best_move: best_move_uci,
           variations: [variation]
@@ -124,6 +125,7 @@ module Uci
       @raw_analysis.strip.split("\n").reverse.each do |row|
         variation = parse_variation_row(row)
         next if variation.nil?
+
         multipv = variation[:multipv] if multipv.nil?
         @analysis[:variations].push variation
         count += 1
@@ -131,7 +133,5 @@ module Uci
       end
       @analysis || {}
     end
-
   end
-
 end

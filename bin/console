@@ -5,7 +5,6 @@ $:.unshift "./lib"
 require 'pry'
 require 'uci'
 
-
 engine = Stockfish::Engine.new("bin/stockfish_8_64_linux")
 puts engine.version
 

@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-
 describe Uci::Engine do
-
   subject(:engine) { Uci::Engine.new }
   let(:fen) { "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" }
 
@@ -27,7 +25,7 @@ describe Uci::Engine do
   end
 
   it "only responds to valid commands" do
-    expect(engine.write_to_engine('bad string') ).to eql("Unknown command: bad string")
+    expect(engine.write_to_engine('bad string')).to eql("Unknown command: bad string")
   end
 
   describe '.analyze' do
@@ -56,7 +54,7 @@ describe Uci::Engine do
 
     it "supports analysis for a specific move" do
       fen = read_fixture("positions/white_wins_in_4.txt")
-      analysis_output = engine.analyze(fen, {searchmoves: "c6d4" })
+      analysis_output = engine.analyze(fen, { searchmoves: "c6d4" })
       expect(analysis_output).to match(/^bestmove e4d5/)
     end
 

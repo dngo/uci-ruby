@@ -5,7 +5,6 @@ $:.unshift(lib) unless $:.include?(lib)
 
 require 'uci/version'
 
-
 Gem::Specification.new do |s|
   s.name = "uci-ruby"
   s.version = Uci::VERSION

@@ -1,7 +1,6 @@
 $:.unshift "./lib"
 require 'uci'
 
-
 def print_elapsed(elapsed)
   puts "Time elapsed #{"%0.3f" % elapsed}s"
 end
@@ -13,7 +12,6 @@ def time_elapsed(&block)
   print_elapsed elapsed
   elapsed
 end
-
 
 t = 0
 
@@ -86,7 +84,6 @@ t += time_elapsed do
   fen = "8/8/4N2k/4n2p/6p1/r4pPP/4bP2/4R1KB w - - 8 39"
   Uci::Engine.new.analyze fen, { :depth => 12, :multipv => 3 }
 end
-
 
 puts
 puts "Total time elapsed"

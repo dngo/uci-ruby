@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Uci::AnalysisParser do
-
   subject(:parser) { Uci::AnalysisParser }
 
   it "suggests_a_move_for_a_normal_position" do
@@ -52,5 +51,4 @@ describe Uci::AnalysisParser do
     move = output[:variations][0]
     expect(move[:score]).to eql "mate in -3"
   end
-
 end

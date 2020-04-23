@@ -11,7 +11,6 @@ RSpec.configure do |config|
   config.mock_with :rspec do |r|
     r.syntax = [:expect, :should]
   end
-
 end
 
 def read_fixture(path)
