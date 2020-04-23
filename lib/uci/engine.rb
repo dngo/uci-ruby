@@ -9,9 +9,9 @@ module Uci
   class Engine
     attr_reader :stdin, :stdout, :stderr, :wait_threads, :version, :pid
 
-    COMMANDS = %w( uci isready setoption ucinewgame position go stop ponderhit quit )
+    COMMANDS = %w(uci isready setoption ucinewgame position go stop ponderhit quit)
 
-    def initialize(engine_path = "bin/stockfish_8_x64_linux")
+    def initialize(engine_path = "bin/stockfish_11_x64_linux")
       @stdin, @stdout, @stderr, @wait_threads = Open3.popen3(engine_path)
       @pid = @wait_threads[:pid]
       @version = @stdout.readline.strip
